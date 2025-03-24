@@ -33,6 +33,7 @@ def doar():
         """)
         conn.commit()
         return jsonify({"mensagem": "Livro doado com sucesso!"}),201
+        
 @app.route("/livros", methods=["GET"])
 def listar_livros():
     with sqlite3.connect("database.db") as conn:
@@ -46,8 +47,9 @@ def listar_livros():
       "autor": item[3],  
       "image_url": item[4]  
             }
-            livros_formatados.append(dicionario_livros)
-    return jsonify(livros_formatados), 200
+
+livros_formatados.append(dicionario_livros)
+return jsonify(livros_formatados), 200
 
 if __name__ == '__main__':
     app.run(debug=True)
